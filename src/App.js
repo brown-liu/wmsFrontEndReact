@@ -1,24 +1,24 @@
-import logo from './logo.svg';
+import React from 'react';
+import { Switch, Route, Redirect } from "react-router-dom";
+import { stoage_locationsRoutes } from './routers/index';
+import Frame from './components/Frame/Index';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Frame>
+
+      <Switch>
+        {stoage_locationsRoutes.map(r => {
+          return <Route key={r.path} path={r.path} exact={r.exact} render={rP => {
+            return <r.component {...rP} />;
+          }} />
+        })}
+        <Redirect to='/notfound' />
+      </Switch>
+
+    </Frame>
+
   );
 }
 

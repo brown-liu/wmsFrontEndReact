@@ -1,13 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
+import './index.css';
 import reportWebVitals from './reportWebVitals';
+import { HashRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import 'antd/dist/antd.css';
+import { accountRoutes } from './routers/index';
+
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router>
+    <Switch>
+
+      <Route path="/storage_locations" render={routeProps=><App{...routeProps}/>}/>
+     
+
+      {accountRoutes.map(r => {
+        return <Route key={r.path} {...r} />;
+      })}
+
+
+      <Redirect to='/notfound' />
+
+    </Switch>
+
+  </Router>
+
+
+  ,
   document.getElementById('root')
 );
 
